@@ -123,8 +123,7 @@ jQuery-Suggest 是一个基于 jQuery 的 suggest 组件，它主要为 PC 端�
 * `onbeforechoose`     :  <function> suggest用上下键选择之后执行方法， 如第一个参数为 e ，则 e.selectedDom 是正要选取的dom
 
 * `onafterchoose`      :  <function> suggest用上下键选择之后执行方法， 如第一个参数为 e ，则 e.selectedDom 是选取的dom
-         
-```
+
 
 ## 版本更新历史
 
