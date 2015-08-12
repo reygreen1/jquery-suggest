@@ -73,55 +73,58 @@ jQuery-Suggest 是一个基于 jQuery 的 suggest 组件，它主要为 PC 端�
 
 组件中可以使用的配置项如下：
 
-		 `data_url`           :  <string>   提供数据的 url ,默认为空
 
-         `suggest_data`       :  <json array> 数据组，json 格式，默认为 {} , 与 data_url 必有一个可用
+* `data_url`           :  <string>   提供数据的 url ,默认为空
 
-         `prefix_protected`   :  <boolean> 前缀保护，为 true 时，已经搜索过的不匹配词，再做增长，一律不作响应。默认为 true
+* `suggest_data`       :  <json array> 数据组，json 格式，默认为 {} , 与 data_url 必有一个可用
+
+* `prefix_protected`   :  <boolean> 前缀保护，为 true 时，已经搜索过的不匹配词，再做增长，一律不作响应。默认为 true
 		 
-         `lazy_suggest_time`  :  <int> 每次按键出 suggest 时间，默认 100 毫秒。 
+* `lazy_suggest_time`  :  <int> 每次按键出 suggest 时间，默认 100 毫秒。 
 
-         `min_word_length`    :  <int> 最低的字数，低于此字数不进行搜索，默认为零。 
+* `min_word_length`    :  <int> 最低的字数，低于此字数不进行搜索，默认为零。 
 
-         `item_selectors`     :  <string> 认为这些是 suggest 列表项，如果不设置是 li.fold-item
+* `item_selectors`     :  <string> 认为这些是 suggest 列表项，如果不设置是 li.fold-item
 
-         `item_hover_style`   :  <string> suggest列表项鼠标经过的样式名 , 默认为'fold-hover' , 
+* `item_hover_style`   :  <string> suggest列表项鼠标经过的样式名 , 默认为'fold-hover' , 
          
-         `auto_submit`        :  <boolean> 选中词或回车时自动提交，默认为否。 
+* `auto_submit`        :  <boolean> 选中词或回车时自动提交，默认为否。 
 
-         `pos_adjust`         :  <string> 分left , top , width , z-index 设置项,用于微调 suggest 框的位置 
+* `pos_adjust`         :  <string> 分left , top , width , z-index 设置项,用于微调 suggest 框的位置 
 
-         `get_data_fun`       :  <string> ajax 或 jsonp 或 remote_call , data_provider , 默认为 jsonp , 如果是 remote_call, 即尝试调用百度的方法, 如果是 data_provider,请提供 data_provider 字段，用以提供数据
+* `get_data_fun`       :  <string> ajax 或 jsonp 或 remote_call , data_provider , 默认为 jsonp , 如果是 remote_call, 即尝试调用百度的方法, 如果是 data_provider,请提供 data_provider 字段，用以提供数据
 
-         `ajax_jsonp`         :  <string> 在 jsonp 请求中重写回调函数的名字。这个值用来替代在 "callback=?" 这种 GET 或 POST 请求中 URL 参数里的 "callback" 部分，默认值为 "callback"
+* `ajax_jsonp`         :  <string> 在 jsonp 请求中重写回调函数的名字。这个值用来替代在 "callback=?" 这种 GET 或 POST 请求中 URL 参数里的 "callback" 部分，默认值为 "callback"
 
-         `fill_data_fun`      :  <function> 如提供，将把 data 传给这个函数对象，要求返回值是一个 html，否则走默认的函数
+* `fill_data_fun`      :  <function> 如提供，将把 data 传给这个函数对象，要求返回值是一个 html，否则走默认的函数
 
-         `render_data_fun`    :  <function> 如提供，将把现在的搜索词和 data 传给这个函数对象，要求返回值是一个 html ，否则走默认的函数
+* `render_data_fun`    :  <function> 如提供，将把现在的搜索词和 data 传给这个函数对象，要求返回值是一个 html ，否则走默认的函数
 
-         `auto_fix_list_pos`  :  <bool> 默认为 true , true 在窗口改变大小时，自动更新列表位置, false 如果 css 保证了这一点。请设为 false，节省效率
+* `auto_fix_list_pos`  :  <bool> 默认为 true , true 在窗口改变大小时，自动更新列表位置, false 如果 css 保证了这一点。请设为 false，节省效率
 
-         `suggest_list`       :  <$> 要求是一个列表的 container 的 jQuery 对象 , 如果不提供，默认为 $('<ul id="search-suggest" class="suggest"></ul>')
+* `suggest_list`       :  <$> 要求是一个列表的 container 的 jQuery 对象 , 如果不提供，默认为 $('<ul id="search-suggest" class="suggest"></ul>')
 
-         `auto_submit`        :  <bool> true 选中列表值后自动调用所在 form 的 submit 方法，true 自动提交 false 不自动提交
+* `auto_submit`        :  <bool> true 选中列表值后自动调用所在 form 的 submit 方法，true 自动提交 false 不自动提交
 
-         `remote_call_charset`:  <string> 远程数据服务使用的字符集编码 
+* `remote_call_charset`:  <string> 远程数据服务使用的字符集编码 
 
-         `remote_call_expire` :  <int> 远程数据服务失效时间（分钟），如果是零，信任服务器 header 头，默认为零 
+* `remote_call_expire` :  <int> 远程数据服务失效时间（分钟），如果是零，信任服务器 header 头，默认为零 
 
-         `emptyPrompt`        :  <boolean> 清空提示，这会导致组件不存储那些没有 suggest 的搜索词。默认值为 false。
+* `emptyPrompt`        :  <boolean> 清空提示，这会导致组件不存储那些没有 suggest 的搜索词。默认值为 false。
 
-         `onbeforesuggest`    :  <function> suggest 显示前的方法，可以用 this.getSuggestData 获得对象  
+* `onbeforesuggest`    :  <function> suggest 显示前的方法，可以用 this.getSuggestData 获得对象  
 
-         `onaftersuggest`     :  <function> suggest 显示之后执行方法，可用 this.getSuggestData 获得对象
+* `onaftersuggest`     :  <function> suggest 显示之后执行方法，可用 this.getSuggestData 获得对象
 
-         `onafterinputchange` :  <function> input内容变化后执行的方法，如第一个参数为 e ，第二个参数为 oldword ，第三个参数为 newWord
+* `onafterinputchange` :  <function> input内容变化后执行的方法，如第一个参数为 e ，第二个参数为 oldword ，第三个参数为 newWord
 
-         `onaftergetdata`     :  <function> suggest获取数据之后执行方法， 如第一个参数为 e , 第二个参数为 data ，则 data.rawdata 是刚刚取到的数据，如需加工，可以重新赋值给它
+* `onaftergetdata`     :  <function> suggest获取数据之后执行方法， 如第一个参数为 e , 第二个参数为 data ，则 data.rawdata 是刚刚取到的数据，如需加工，可以重新赋值给它
 
-         `onbeforechoose`     :  <function> suggest用上下键选择之后执行方法， 如第一个参数为 e ，则 e.selectedDom 是正要选取的dom
+* `onbeforechoose`     :  <function> suggest用上下键选择之后执行方法， 如第一个参数为 e ，则 e.selectedDom 是正要选取的dom
 
-         "onafterchoose"      :  <function> suggest用上下键选择之后执行方法， 如第一个参数为 e ，则 e.selectedDom 是选取的dom
+* `onafterchoose`      :  <function> suggest用上下键选择之后执行方法， 如第一个参数为 e ，则 e.selectedDom 是选取的dom
+         
+```
 
 ## 版本更新历史
 
