@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>suggestion-simple</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="" rel="stylesheet">
+<style type="text/css">
+	html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;margin:0;padding:0;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}ol,ul{list-style:none}blockquote,q{quotes:none}table{border-collapse:collapse;border-spacing:0}input{border:0;margin:0;padding:0}body{background:#f0f1f1;color:#777;font-size:14px;font-family:"Microsoft yahei",Hei,arial,sans-serif}a{color:#36c;text-decoration:none}h1,h2{color:#000;}
+</style>
+<style>
+	body{
+		width: 100%;
+		height: 500px;/* 为了测试body上点击事件 */
+	}
+	#mashead .mashead-bd{float:left;margin-left:20px;margin-top:9px;padding:0;width:534px;position:relative;}
+	#mashead .mashead-bd form{float:left;position:relative;}
+	#mashead .mashead-bd .ipt-searcharea{float:left;height:35px;border:3px solid #868e9b;box-shadow:inset 1px 1px 1px rgba(0,0,0,.2);background:#fff;}
+	#mashead .mashead-bd .ipt-search{width: 420px;margin-top:7px;padding:0 6px;height:22px;line-height:22px;font-size:14px;border:0;background:none;overflow:hidden;outline:none;}
+	#mashead .mashead-bd .btn-search{position:absolute;right:-96px;width:96px;height:41px;border:none;background:#868e9b;font-size:14px;cursor:pointer;vertical-align:top;color:#fff;font-weight:bold;}
+
+	.search-bd{margin: 100px;}
+	.search-bd .search-text{border:1px solid #B8B8B8;}
+	.search-bd .search-submit{background: #000019;}
+	.suggest{line-height: 26px;border: 1px solid #d6d6d6;display: none;background:#fff;overflow: hidden;}
+	.suggest .sug-bd{background: #fff url(http://p4.qhimg.com/t01ea6890c53a90a47d.png) right top no-repeat;}
+	.suggest .hover{background: #eee;}
+	.suggest .sug-item{padding: 0 5px;font-size: 14px;cursor: pointer;line-height: 26px;font-weight: bold;}
+	.suggest .sug-bd .sug-item{display:inline-block;width:100%;font-weight: normal;}
+	.suggest .sug-index{ display: block; float: left; width: 15px; height: 15px; margin: 5px 10px 0 0; line-height: 15px; font-size: 11px; text-align: center; color: #fff; -webkit-text-size-adjust: none; background: url(http://p1.qhimg.com/t01829ff981997b80bb.png) 0 -26px no-repeat; }
+	.suggest .sug-hot{background-position: 0 0;}
+	.suggest .sug-ft {position: absolute; right: 10px;bottom: 0;text-align: right; line-height: 24px;color: #e5e5e5;font-size: 12px;}
+
+</style>
+</head>
+<body>
+	<div id="mashead">
+	    <div class="mashead-bd">
+		    <div class="search-form">
+	            <form id="search" target="_blank" method="get" action="https://www.haosou.com/s" class="gclearfix">
+			        <div class="ipt-searcharea">
+	                    <input id="search-kw" class="ipt-search placeholder" type="text" autocomplete="off" name="q" value="" placeholder="请输入搜索关键词">
+			        </div>
+			        <button id="search-btn" class="btn-search" type="submit">搜索</button>
+			        <span id="hide-input">
+	                    <input type="hidden" name="ie" value="utf-8">
+					</span>
+			    </form>
+		    </div>
+	    </div>
+    </div>
+
+    <script src="./jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="./suggest.js"></script>
+    <script type="text/javascript">
+    	(function(){
+			var suggest = new Suggest($("#search-kw"), {
+					data_url : 'http://gmu.baidu.com/demo/data/suggestion.php?wd=%KEYWORD%&cb=?',
+		            get_data_fun : "jsonp",
+		            ajax_jsonp : "cb",
+		            item_hover_style : "hover",
+		            item_selectors : "li",  
+		            pos_adjust : {"left" : -1,"top" : 3 , "z-index" : 99},
+		            auto_submit : true , 
+		            auto_fix_list_pos : true ,
+					trimKW : true,
+					emptyPrompt : true,
+					onaftergetdata : function (e, data){
+		                // data.rawdata
+		                data.rawdata = data.rawdata.s;
+		                // console.log('rawdata:');
+		                // console.log(data.rawdata);
+		            }
+			});
+
+			console.log('...');
+		})();
+    </script>
+</body>
+</html>

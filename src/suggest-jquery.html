@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>suggestion-jquery</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="" rel="stylesheet">
+<style type="text/css">
+	html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;margin:0;padding:0;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}ol,ul{list-style:none}blockquote,q{quotes:none}table{border-collapse:collapse;border-spacing:0}input{border:0;margin:0;padding:0}body{background:#f0f1f1;color:#777;font-size:14px;font-family:"Microsoft yahei",Hei,arial,sans-serif}a{color:#36c;text-decoration:none}h1,h2{color:#000;}
+</style>
+<style>
+	body{
+		width: 100%;
+		height: 500px;/* 为了测试body上点击事件 */
+	}
+	#mashead .mashead-bd{float:left;margin-left:20px;margin-top:9px;padding:0;width:534px;position:relative;}
+	#mashead .mashead-bd form{float:left;position:relative;}
+	#mashead .mashead-bd .ipt-searcharea{float:left;height:35px;border:3px solid #868e9b;box-shadow:inset 1px 1px 1px rgba(0,0,0,.2);background:#fff;}
+	#mashead .mashead-bd .ipt-search{width: 420px;margin-top:7px;padding:0 6px;height:22px;line-height:22px;font-size:14px;border:0;background:none;overflow:hidden;outline:none;}
+	#mashead .mashead-bd .btn-search{position:absolute;right:-96px;width:96px;height:41px;border:none;background:#868e9b;font-size:14px;cursor:pointer;vertical-align:top;color:#fff;font-weight:bold;}
+
+	.search-bd{margin: 100px;}
+	.search-bd .search-text{border:1px solid #B8B8B8;}
+	.search-bd .search-submit{background: #000019;}
+	.suggest{line-height: 26px;border: 1px solid #d6d6d6;display: none;background:#fff;overflow: hidden;}
+	.suggest .sug-bd{background: #fff url(http://p4.qhimg.com/t01ea6890c53a90a47d.png) right top no-repeat;}
+	.suggest .hover{background: #eee;}
+	.suggest .sug-item{padding: 0 5px;font-size: 14px;cursor: pointer;line-height: 26px;font-weight: bold;}
+	.suggest .sug-bd .sug-item{display:inline-block;width:100%;font-weight: normal;}
+	.suggest .sug-index{ display: block; float: left; width: 15px; height: 15px; margin: 5px 10px 0 0; line-height: 15px; font-size: 11px; text-align: center; color: #fff; -webkit-text-size-adjust: none; background: url(http://p1.qhimg.com/t01829ff981997b80bb.png) 0 -26px no-repeat; }
+	.suggest .sug-hot{background-position: 0 0;}
+	.suggest .sug-ft {position: absolute; right: 10px;bottom: 0;text-align: right; line-height: 24px;color: #e5e5e5;font-size: 12px;}
+
+</style>
+</head>
+<body>
+	<div id="mashead">
+	    <div class="mashead-bd">
+		    <div class="search-form">
+	            <form id="search" target="_blank" method="get" action="https://www.haosou.com/s" class="gclearfix">
+			        <div class="ipt-searcharea">
+	                    <input id="search-kw" class="ipt-search placeholder" type="text" autocomplete="off" name="q" value="" placeholder="请输入搜索关键词">
+			        </div>
+			        <button id="search-btn" class="btn-search" type="submit">搜索</button>
+			        <span id="hide-input">
+	                    <input type="hidden" name="ie" value="utf-8">
+					</span>
+			    </form>
+		    </div>
+	    </div>
+    </div>
+    <script id="_default_hot_input" type="data/hot-input">
+    [{"text":"误报6级地震","hot":"1","link":"https://www.haosou.com/s?ie=utf-8&q=%E8%AF%AF%E6%8A%A56%E7%BA%A7%E5%9C%B0%E9%9C%87&src=so_isearch"},{"text":"陕西山阳山体滑坡","hot":"1","link":"https://www.haosou.com/s?ie=utf-8&q=%E9%99%95%E8%A5%BF%E5%B1%B1%E9%98%B3%E5%B1%B1%E4%BD%93%E6%BB%91%E5%9D%A1&src=so_isearch"},{"text":"化肥恢复增值税","hot":"1","link":"https://www.haosou.com/s?ie=utf-8&q=%E5%8C%96%E8%82%A5%E6%81%A2%E5%A4%8D%E5%A2%9E%E5%80%BC%E7%A8%8E&src=so_isearch"},{"text":"公交猥亵4女孩","hot":"0","link":"https://www.haosou.com/s?q=%E5%85%AC%E4%BA%A4%E7%8C%A5%E4%BA%B54%E5%A5%B3%E5%AD%A9&src=know_side_nlp&tn=news"},{"text":"北京长安街禁行","hot":"0","link":"https://www.haosou.com/s?q=%E9%95%BF%E5%AE%89%E8%A1%97%E7%A6%81%E8%A1%8C&src=know_side_nlp&tn=news"},{"text":"安徽官员抗台风身亡","hot":"0","link":"https://www.haosou.com/s?q=%E5%AE%89%E5%BE%BD%E5%AE%98%E5%91%98%E6%8A%97%E5%8F%B0%E9%A3%8E%E8%BA%AB%E4%BA%A1&src=know_side_nlp&tn=news"},{"text":"国务院鼓励弹性作息","hot":"0","link":"https://www.haosou.com/s?q=%E5%9B%BD%E5%8A%A1%E9%99%A2%E9%BC%93%E5%8A%B1%E5%BC%B9%E6%80%A7%E4%BD%9C%E6%81%AF&src=know_side_nlp&tn=news"},{"text":"刘亦菲奢华豪宅","hot":"0","link":"https://www.haosou.com/s?q=%E5%88%98%E4%BA%A6%E8%8F%B2%E5%A5%A2%E5%8D%8E%E8%B1%AA%E5%AE%85&src=know_side_nlp&tn=news"},{"text":"黄晓明10月办婚礼","hot":"0","link":"https://www.haosou.com/s?q=%E9%BB%84%E6%99%93%E6%98%8Ebaby%E5%8A%9E%E5%A9%9A%E7%A4%BC&src=know_side_nlp&tn=news"},{"text":"刘强东划好婚前财产","hot":"0","link":"https://www.haosou.com/s?q=%E5%88%98%E5%BC%BA%E4%B8%9C%E5%88%92%E5%A5%BD%E5%A9%9A%E5%89%8D%E8%B4%A2%E4%BA%A7&src=know_side_nlp&tn=news"}]
+    </script>
+
+    <script src="./jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="./jquery.tmpl.js"></script>
+    <script type="text/javascript" src="./suggest.js"></script>
+    <script type="text/javascript">
+    	(function(){
+			var _suggest_list_item_tmpl = '<li>'+
+												'<div class="sug-item" data="${text}">'+
+													'<span class="title">${text}</span>'+
+												'</div>'+
+											'</li>',
+			_suggest_list_static_tmpl = '<li class="def-item">'+
+											'<a class="sug-item" data="${text}" href="${link}">'+
+												'<span class="sug-index ${hot}">${index}</span>'+
+												'<span class="title">'+
+													'<span>${text}</span>'+
+												'</span>'+
+											'</a>'+
+										'</li>';
+			
+			var static_html = function(){
+		        var data=[],
+		            dataStr = $("#_default_hot_input").html() ,
+					suggestHtml=[];
+
+		            data = $.parseJSON($.trim(dataStr + ""));
+
+		            if (!data){
+		                return "<ul class='sug-bd' style='display:none;'></ul>";
+		            }
+
+		            for(var i in data){
+		                data[i]["index"] = parseInt(i,10) + 1;
+		            }
+
+					suggestHtml.push('<ul class="sug-bd">');
+
+		        for(var i = 0 ; i < data.length ; ++i) {
+		        	var d=data[i],hot = ((d.hot | 0 ) ? "sug-hot" : "");
+					suggestHtml.push($.tmpl(_suggest_list_static_tmpl, {"text":d.text,"index":d.index,"hot":hot,"link":d.link})[0].outerHTML);
+		        }
+		        suggestHtml.push('</ul><div class="sug-ft">由360搜索提供</div>');
+		        return suggestHtml.join("");
+			}();
+
+			/* cust suggest */
+			var CustSuggest={
+				install:function(dom, conf){
+					var configs = {
+				            data_url : 'http://gmu.baidu.com/demo/data/suggestion.php?wd=%KEYWORD%&cb=?',
+				            get_data_fun : "jsonp",
+				            ajax_jsonp : "cb",
+				            item_hover_style : "hover",
+				            item_selectors : "li",  
+				            pos_adjust : {"left" : -1,"top" : 3 , "z-index" : 99},
+				            auto_submit : true , 
+				            auto_fix_list_pos : true ,
+							trimKW : true,
+							emptyPrompt : true,
+				            render_data_fun : function (nowWord , data){
+				                var suggestHtml = [] ; 
+				                suggestHtml.push("<ul>");
+				                for(var i = 0 ; i < data.length ; ++i) {
+				                	suggestHtml.push($.tmpl(_suggest_list_item_tmpl, { text : data[i] })[0].outerHTML);
+				                }
+				                suggestHtml.push('</ul><div class="sug-ft">由360搜索提供</div>');
+				                return suggestHtml.join("");
+				            },
+				            fill_data_fun : function (item){
+				                var node = $(item);
+								var sname = node.find('.sug-item').attr('data');
+								this._dom.val(sname);
+				            },
+				            onaftergetdata : function (e, data){
+				                // data.rawdata
+				                data.rawdata = data.rawdata.s;
+				                // console.log('rawdata:');
+				                // console.log(data.rawdata);
+				            },
+				            onaftersuggest : function(e){
+				            	// console.log('aftersuggest');
+				            	return true;
+				            },
+				            onbeforesuggest : function (e){
+				            	// console.log('beforesuggest');
+				                return true;
+				            },
+				            onafterinputchange : function(e, oldword, newword){
+				            	Pop.call(this);
+				            }      
+				        };
+					var self = this;
+					dom.each(function(i, el){
+						var sg = new Suggest( $(el), configs); 
+						if(conf.popup){
+							$(el).click(function(e){
+								Pop.call(sg);
+								e.stopPropagation();
+							});
+						}
+					});
+				}
+			}
+
+			function Pop(){
+				if($.trim(this._dom.val()) == ""){//没输入时显示默认
+					this._resetPos();
+		            this.autoSubmit = false;
+					this.suggestList.html(static_html).show();
+		        }else {
+		            if (this.suggestList.find("li.def-item").length){
+		                this.autoSubmit = false;
+		            }else{
+		                this.autoSubmit = true;
+		            }
+		            
+					this.suggestList.show();
+				}
+			}
+
+			// QW.provide('CustSuggest',CustSuggest);
+			window.CustSuggest = CustSuggest;
+			
+		})();
+
+
+    	CustSuggest.install($("#search-kw"),{"popup":true});
+
+    </script>
+</body>
+</html>
